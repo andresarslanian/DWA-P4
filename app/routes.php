@@ -13,7 +13,10 @@
 
 Route::get('/', function()
 {
-	return View::make('index');
+    if (Auth::check())
+       return View::make('auth/login');
+    else
+	   return View::make('auth/login');
 });
 
 
@@ -24,30 +27,10 @@ Route::get('/', function()
 \*--------------------------------------*/
 
 # Get Log In
-Route::get('/login',
-    array(
-        'before' => 'guest',
-        function() {
-            return View::make('auth/login');
-        }
-    )
-);
+Route::get('/login', array('before' => 'guest', 'uses' => 'AuthController@getLogin'));
 
 # Post Log In
-Route::post('/login', array('before' => 'csrf', function() {
-    
-    $credentials = Input::only('username', 'password');
-    
-    if (Auth::attempt($credentials, $remember = true)) {
-        return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
-    }
-    else {
-        return Redirect::to('auth/login')->with('flash_message', 'Log in failed; please try again.');
-    }
-    
-    return Redirect::to('auth/login');
-    
-}));
+Route::post('/login', array('before' => 'csrf', 'uses' => 'AuthController@postLogin'));
 
 # Logout
 Route::get('/logout', function() {

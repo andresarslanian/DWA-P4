@@ -25,10 +25,10 @@
 					<span class="icon-bar"></span>
 				</button>
 				<div class="navbar-brand p-logo" >
-					<a class="p-refresh " href="" target="" title="" data-track-pagename="" data-type="o" data-track-type="track-ajax">
+					<a class="p-refresh " href="" >
                         
                     </a>
-                    <a href="http://www.philips.com/global/country_selector.page?locale_org=en_us" target="" title="" data-track-pagename="" data-type="o" data-track-type="track-ajax">
+                    <a href="#" >
                         <span class="p-long"><br>&nbsp;&nbsp;&nbsp;Argentina</span>
                     </a>
 				</div>
@@ -60,10 +60,10 @@
 		<div class='flash-message'>{{ Session::get('flash_message') }}</div>
 	@endif
 
-	<a href='/'><img class='logo' src='<?php echo URL::asset('/assets/images/logo@2x.png'); ?>' alt='Foobooks Logo'></a>
+	<div class="continer-fluid main-container">
+		@yield('content')
+	</div>
 
-	@yield('content')
-	
 	<script type="text/javascript" src="<?php echo URL::asset('/assets/js/bootstrap.min.js') ?>"></script>
 	@yield('body')
 		

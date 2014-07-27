@@ -1,13 +1,14 @@
 @extends('_master')
 
 @section('title')
-	Welcome to Foobooks
+	Philips - Led Replacement Manager
 @stop
 
 @section('content')
 
-	<h1>Welcome to Foobooks</h1>
-
+	<div class="col-sm-offset-3">
+	<h1>Philips Led Replacement Management</h1>
+	</div>
 
 	
 @stop
