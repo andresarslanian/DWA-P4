@@ -6,10 +6,13 @@
 
 @section('content')
 
-	<div class="col-sm-offset-3">
+	<div class="col-sm-offset-3 col-sm-9">
 	<h1>Philips Led Replacement Management</h1>
 	</div>
 
+	@if(Session::get('flash_message'))
+		<div class='flash-message col-sm-3 col-sm-offset-5 login-alert center alert alert-info' role="alert">{{ Session::get('flash_message') }}</div>
+	@endif
 	<div class="col-sm-offset-5 login-container col-sm-3">
 		{{ Form::open(array('url' => '/login')) }}
 					

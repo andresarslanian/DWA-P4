@@ -30,14 +30,14 @@ class CreateIncidentTable extends Migration {
 			$table->text('description')->nullable()->default(null);
 
 			# FK
-			$table->integer('incident_id')->unsigned(); # type of incident	
+			$table->integer('type_id')->unsigned(); # type of incident	
 			$table->integer('reporter_id')->unsigned(); # who reports the incident
 			$table->integer('owner_id')->unsigned(); 	# to whom it assigns it
   			$table->integer('action_id')->unsigned();   # what action was taken
 			$table->integer('state_id')->unsigned(); 	# in what state the incident is
 
 			# Define foreign keys...
-			$table->foreign('incident_id')->references('id')->on('incident_types');	
+			$table->foreign('type_id')->references('id')->on('incident_types');	
 			$table->foreign('reporter_id')->references('id')->on('users');
 			$table->foreign('owner_id')->references('id')->on('companies');						
 			$table->foreign('action_id')->references('id')->on('actions');

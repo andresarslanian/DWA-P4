@@ -2,11 +2,9 @@
 
 class UserController extends \BaseController {
 
-	/* Authentication methods */
-	public function login()
-	{
-		return View::make('user/login');
-	}
+	# Maximum entries per form
+	private $maxEntries = 10;
+
 
 	/**
 	 * Display a listing of the resource.
@@ -15,7 +13,38 @@ class UserController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		# Get the sorting parameters
+	    $sortby = Input::get('sort');
+	    $order = Input::get('order');
+
+	    # Check if the value passed corresponds to a column of the table
+	    if ("exists:users,$sortby")
+	        $sortby = "company_id";
+	    if (!$order)
+	        $order = "desc";
+
+	    # Get the companies for the dropdown meny
+	    $companies[]="All";
+	    foreach (Company::all() as $c) {
+	        $companies[$c->name] = $c->name;
+	    }
+
+	    # Check if it has to be filtered by company
+	    $company = Input::get('company');
+
+	    $users = [];
+
+	    if ($company){
+	    	# Filter by company
+	        $selectedCompany = Company::where('name','LIKE', $company)->get()->first();
+	        if ($selectedCompany)
+	            $users = User::orderBy($sortby, $order)->with('company')->where('company_id',  $selectedCompany->id)->paginate($this->maxEntries);
+	    } else {
+	    	# All the results
+	        $users = User::orderBy($sortby, $order)->with('company')->paginate($this->maxEntries);
+	    }
+
+	    return View::make('user/list')->with("users",  $users)->with("sort",  $sortby)->with("order",  $order)->with('companies', $companies);
 	}
 
 
@@ -24,11 +53,52 @@ class UserController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function getCreate()
 	{
-		//
+	    $companies = [];
+	    foreach (Company::all() as $company) {
+	        $companies[$company->id] = $company->name;
+	    }
+	    return View::make('user/create')->with("companies",$companies);
+		
 	}
 
+	public function postCreate()
+	{
+	    $user = new User;
+	    $user->email        = Input::get('email');
+	    $user->password     = Hash::make(Input::get('password'));
+	    $user->firstname    = Input::get('firstname');
+	    $user->lastname     = Input::get('lastname');
+	    $user->phone        = Input::get('phone');
+	    $user->company_id   = Input::get('company_id');    
+	    
+	    $u = new User();
+	    try {
+	    	if ($u->validate(Input::all())){
+	    		echo "caca1";
+		        $user->save();
+		        $user_role = new UserRole;
+		        $user_role->user_id =  $user->id;      
+		        $user_role->role_id = Role::where('role', '=', 'user')->first()->id;
+		        $user_role->save();
+	    	} else {
+				return Redirect::to('/create-user')
+					            ->with('flash_message', 'User creation failed; please try again.')->withErrors($u->errors())
+					            ->withInput();
+	    	}	
+	    }
+	    catch (Exception $e) {
+	        return Redirect::to('/create-user')
+	            ->with('flash_message', 'User creation failed; please try again.')->withErrors($u->errors())
+	            ->withInput();
+	    }
+	    
+	    # Log in
+	    Auth::login($user);
+	    
+	    return Redirect::to('/list-users')->with('flash_message', 'User created.');
+	}
 
 	/**
 	 * Store a newly created resource in storage.

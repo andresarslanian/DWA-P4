@@ -1,6 +1,16 @@
 <?php 
 
-class Incident extends Eloquent { 
+class Incident extends ValidateableEloquent { 
+
+	# For validation
+	protected $rules = array(
+        'address' 	=> 'required',
+        'house_number'  	=> 'required',
+        'email'  		=> 'required|email',
+        'company_id'  	=> 'required',
+        'password'  	=> 'required',
+    );
+
 
 	# Enable fillable on the 'name' column so we can use the Model shortcut Create
 	protected $fillable = array('name');
@@ -18,12 +28,14 @@ class Incident extends Eloquent {
 	    return $this->belongsTo('State');
     }    
 
+
 	# Relationship method...
     public function type() {
 	    
 	    # Tags belongs to many Books
 	    return $this->belongsTo('IncidentType');
     }           
+          
 
 	# Relationship method...
     public function reporter() {

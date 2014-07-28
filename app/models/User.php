@@ -5,9 +5,18 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends ValidateableEloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
+
+	# For validation
+	protected $rules = array(
+        'firstname' 	=> 'required',
+        'lastname'  	=> 'required',
+        'email'  		=> 'required|email',
+        'company_id'  	=> 'required',
+        'password'  	=> 'required',
+    );
 
 	/**
 	 * The database table used by the model.

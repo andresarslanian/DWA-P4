@@ -14,7 +14,7 @@
 Route::get('/', function()
 {
     if (Auth::check())
-       return View::make('auth/login');
+       return Redirect::to('/list-users');
     else
 	   return View::make('auth/login');
 });
@@ -33,55 +33,8 @@ Route::get('/login', array('before' => 'guest', 'uses' => 'AuthController@getLog
 Route::post('/login', array('before' => 'csrf', 'uses' => 'AuthController@postLogin'));
 
 # Logout
-Route::get('/logout', function() {
-    
-    # Log out
-    Auth::logout();
-    
-    # Send them to the homepage
-    return Redirect::to('/');
-    
-});
+Route::get('/logout', 'AuthController@getLogout');
 
-# Get Signup
-Route::get('/signup', array( 'before' => 'guest',function() {
-    $companies = [];
-    foreach (Company::all() as $company) {
-        $companies[$company->id] = $company->name;
-    }
-    return View::make('auth/signup')->with("companies",$companies);
-}));
-
-# Post Signup
-Route::post('/signup', array('before' => 'csrf', function() {
-
-    $user = new User;
-    $user->email        = Input::get('email');
-    $user->password     = Hash::make(Input::get('password'));
-    $user->firstname    = Input::get('firstname');
-    $user->lastname     = Input::get('lastname');
-    $user->phone        = Input::get('phone');
-    $user->company_id   = Input::get('company_id');    
-    
-    try {
-        $user->save();
-        $user_role = new UserRole;
-        $user_role->user_id =  $user->id;      
-        $user_role->role_id = Role::where('role', '=', 'user')->first();
-        $user_role->save();
-    }
-    catch (Exception $e) {
-        return Redirect::to('auth/signup')
-            ->with('flash_message', 'Sign up failed; please try again.')
-            ->withInput();
-    }
-    
-    # Log in
-    Auth::login($user);
-    
-    return Redirect::to('/')->with('flash_message', 'Welcome to Foobooks!');
-    
-}));
 
 
 
@@ -90,8 +43,11 @@ Route::post('/signup', array('before' => 'csrf', function() {
                 INCIDENTS
 
 \*--------------------------------------*/
-# Create an Incident
-Route::get('create-incident/{id?}', array('uses' => 'IncidentController@show'));
+# Get Create
+Route::get('/create-incident', "IncidentController@getCreate");//function() {//array( 'before' => 'guest',function() {
+
+# Post Create
+Route::post('/create-incident', array('before' => 'csrf', "uses" => "IncidentController@postCreate"));
 
 # View an Incident
 Route::get('view-incident', array('before' => 'auth', function() {
@@ -99,17 +55,9 @@ Route::get('view-incident', array('before' => 'auth', function() {
 
 }));
 
-# List all incidents
-Route::get('list-incidents', array('before' => 'auth', function() {
+Route::get('list-incidents/', array('as' => 'incident.list', 'before' => 'auth', 'uses' => 'IncidentController@index'));
+Route::post('list-incidents/', array('as' => 'incident.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'IncidentController@index'));
 
-
-}));
-
-# Modify an Incident
-Route::get('modify-incident', array('before' => 'auth', function() {
-
-
-}));
 
 /*--------------------------------------*\
 
@@ -171,17 +119,16 @@ Route::get('list-lamps', array('before' => 'auth', function() {
 
 \*--------------------------------------*/
 
-# Create a User
-Route::get('create-user/', function() {
+# Get Create
+Route::get('/create-user', "UserController@getCreate");//function() {//array( 'before' => 'guest',function() {
+
+# Post Create
+Route::post('/create-user', array('before' => 'csrf', "uses" => "UserController@postCreate"));
 
 
-});
-
-# View a Lamp
-Route::get('view-user', array('before' => 'auth', function() {
-
-
-}));
+# List users
+Route::get('list-users/', array('as' => 'user.list', 'before' => 'auth', 'uses' => 'UserController@index'));
+Route::post('list-users/', array('as' => 'user.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'UserController@index'));
 
 
 

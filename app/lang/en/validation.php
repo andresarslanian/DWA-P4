@@ -86,6 +86,37 @@ return array(
 		'attribute-name' => array(
 			'rule-name' => 'custom-message',
 		),
+		'firstname' => array(
+			'required' => 'The first name is required',
+		),		
+		'lastname' => array(
+			'required' => 'The last name is required',
+		),		
+		'company_id' => array(
+			'required' => 'The company is required',
+		),		
+		'house_number' => array(
+			'required' => 'The house number is required',
+		),		
+		'picket_number' => array(
+			'required' => 'The picket number is required',
+		),		
+		'hw_address' => array(
+			'required' => 'The hw address is required',
+		),		
+		'lamp_type' => array(
+			'required' => 'The lamp type is required',
+		),		
+		'type_id' => array(
+			'required' => 'The type of incident is required',
+		),		
+		'owner_id' => array(
+			'required' => 'The incident should be assigned to someone',
+		),		
+		'state_id' => array(
+			'required' => 'The state of the incident is required',
+		),		
+							
 	),
 
 	/*

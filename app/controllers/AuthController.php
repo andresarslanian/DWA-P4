@@ -33,10 +33,17 @@ class AuthController extends BaseController {
 	        return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
 	    }
 	    else {
-	        return Redirect::to('auth/login')->with('flash_message', 'Log in failed; please try again.');
+	        return Redirect::to('/login')->with('flash_message', 'Log in failed; please try again.');
 	    }
 	    
 	    return Redirect::to('auth/login');
+	}
+	public function getLogout(){
+	    # Log out
+	    Auth::logout();
+	    
+	    # Send them to the homepage
+	    return Redirect::to('/');
 	}
 
 }

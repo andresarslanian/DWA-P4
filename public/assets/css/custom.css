@@ -47,6 +47,15 @@ height: 140px;
 	text-align: right;
 }
 
+.navbar-nav>.active>a {
+	background-color: cornflowerblue !important;
+}
+
+.login-alert{
+	margin-top: 2%;
+	margin-bottom: -10%;
+}
+
 .p-nav{
 	margin-left: 150px;
 }
@@ -80,4 +89,37 @@ body{
 
 .p-navbar li a{
 	color: white !important;	
+}
+
+
+/* Sign Up */
+.signup-container{
+	margin-top: 7%;
+}
+
+/* User */
+.list-table{
+	background: white;
+	color: darkslateblue;
+	border-radius: 5px;
+	background-color: rgba(250,250,250,0.9);
+}
+
+.list-filter{
+	margin-left: 75% !important;
+	padding: 0 !important;
+}
+
+
+.forms-container{
+	background-color: rgba(250,250,250,0.9);
+	color: darkslateblue;
+	padding: 10px;
+	margin-bottom: 30px;
+	border-radius: 5px;
+}
+
+
+.validation-message-error{
+	color:#b94a48;
 }

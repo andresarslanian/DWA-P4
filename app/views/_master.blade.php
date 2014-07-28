@@ -37,9 +37,10 @@
 			<div class="collapse navbar-collapse" id="navbar-philips">
 				<ul class="nav navbar-nav p-nav">
 					@if(Auth::check())
-						<li class="active"><a href="#">Users</a></li>
-						<li><a href="#">Incidents</a></li>
+						<li class=""><a href="/list-users">Users</a></li>
+						<li><a href="/list-incidents">Incidents</a></li>
 						<li><a href="#">Replacements</a></li>
+						<li><a href="#">Lamps</a></li>
 					@endif
 				</ul>
 		
@@ -56,15 +57,12 @@
 	</nav>
 
 
-	@if(Session::get('flash_message'))
-		<div class='flash-message'>{{ Session::get('flash_message') }}</div>
-	@endif
-
 	<div class="continer-fluid main-container">
 		@yield('content')
 	</div>
 
 	<script type="text/javascript" src="<?php echo URL::asset('/assets/js/bootstrap.min.js') ?>"></script>
+	<script type="text/javascript" src="<?php echo URL::asset('/assets/js/custom.js') ?>"></script>
 	@yield('body')
 		
 </body>
