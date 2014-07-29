@@ -37,10 +37,10 @@ class IncidentController extends \BaseController {
 	    	# Filter by company
 	        $selectedCompany = Company::where('name','LIKE', $company)->get()->first();
 	        if ($selectedCompany)
-	            $incidents = Incident::orderBy($sortby, $order)->with('owner', 'reporter', 'action', 'state', 'type')->where('owner_id',  $selectedCompany->id)->paginate($this->maxEntries);
+	            $incidents = Incident::orderBy($sortby, $order)->with('owner', 'reporter', 'action', 'state', 'type', 'lamp_type')->where('owner_id',  $selectedCompany->id)->paginate($this->maxEntries);
 	    } else {
 	    	# All the results
-	        $incidents = Incident::orderBy($sortby, $order)->with('owner', 'reporter', 'action', 'state', 'type')->paginate($this->maxEntries);
+	        $incidents = Incident::orderBy($sortby, $order)->with('owner', 'reporter', 'action', 'state', 'type', 'lamp_type')->paginate($this->maxEntries);
 	    }
 
 	    return View::make('incident/list')->with("incidents",  $incidents)->with("sort",  $sortby)->with("order",  $order)->with('companies', $companies);
@@ -55,48 +55,51 @@ class IncidentController extends \BaseController {
 	 */
 	public function getCreate()
 	{
-	    $companies = [];
+	    $companies [] = "Select an owner";
 	    foreach (Company::all() as $company) {
 	        $companies[$company->id] = $company->name;
 	    }
 
-	    $states = [];
-	    foreach (State::all() as $state) {
-	        $states[$state->id] = $state->description;
-	    }
-
-	    $actions = [];
-	    foreach (Action::all() as $action) {
-	        $actions[$action->id] = $action->description;
-	    }
-
-	    $incidents = [];
+	    $incidents [] = "Select a type";
 	    foreach (IncidentType::all() as $incident) {
 	        $incidents[$incident->id] = $incident->description;
 	    }
 
+	    $lamp_types [] = "Select a Lamp Type";
+	    foreach (LampType::all() as $lamp_type) {
+	        $lamp_types[$lamp_type->id] = $lamp_type->type;
+	    }
 	    	    	    	    
 	    return View::make('incident/create')->with("companies",$companies)
-	    	->with("states",$states)
-	    	->with("actions",$actions)
+	    	->with("lamp_types",$lamp_types)
 	    	->with("incidents",$incidents);
 		
 	}
 
 	public function postCreate()
 	{
+		$i = new Incident();
+		if (!$i->validate(Input::all())){
+			return Redirect::to('/create-incident')
+			            ->with('flash_message', 'Incident not created; please try again.')->withErrors($i->errors())
+			            ->withInput();
+		}
+
 	    $incident = new Incident;
 	    $incident->address        = Input::get('address');
 	    $incident->house_number   = Input::get('house_number');
-	    $incident->lamp_type      = Input::get('lamp_type');
+	    $lt = Input::get('lamp_type_id');
+	    if ($lt != '0'){
+	  		$incident->lamp_type_id;   
+	    }
+
 	    $incident->hw_address     = Input::get('hw_address');
 	    $incident->description    = Input::get('description');
 	    $incident->picket_number  = Input::get('picket_number');
 	    $incident->house_number   = Input::get('house_number');
 	    $incident->type_id        = Input::get('type_id');    
 	    $incident->owner_id   	  = Input::get('owner_id');    
-	    $incident->action_id      = Input::get('action_id');    
-	    $incident->state_id   	  = Input::get('state_id');    
+	    $incident->state_id   	  = State::where('description', '=', 'open')->first()->id;   
 	    $incident->reporter_id    = Auth::id();    
 	    
 	    try {

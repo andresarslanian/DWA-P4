@@ -14,7 +14,7 @@ class User extends ValidateableEloquent implements UserInterface, RemindableInte
         'firstname' 	=> 'required',
         'lastname'  	=> 'required',
         'email'  		=> 'required|email',
-        'company_id'  	=> 'required',
+        'company_id'  	=> 'exists:companies,id',
         'password'  	=> 'required',
     );
 

@@ -23,7 +23,7 @@ class ValidateableEloquent extends Eloquent {
             $this->errors = $v->errors();
             return false;
         }
-        var_dump($v);
+
         // validation pass
         return true;
     }

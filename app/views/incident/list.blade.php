@@ -53,7 +53,14 @@ Incidents
 					<td>{{$incident->type->description}}</td>
 					<td>{{$incident->owner->name}}</td>
 					<td>{{$incident->state->description}}</td>
-					<td>{{$incident->action->description}}</td>
+
+					<td>
+						@if ($incident->action)
+							{{$incident->action->description}}
+						@else
+							-
+						@endif
+					</td>
 				</tr>
 			@endforeach
 	    </tbody>		

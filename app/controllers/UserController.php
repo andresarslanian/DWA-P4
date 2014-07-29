@@ -55,9 +55,9 @@ class UserController extends \BaseController {
 	 */
 	public function getCreate()
 	{
-	    $companies = [];
-	    foreach (Company::all() as $company) {
-	        $companies[$company->id] = $company->name;
+	    $companies[]="Select a company";
+	    foreach (Company::all() as $c) {
+	        $companies[$c->id] = $c->name;
 	    }
 	    return View::make('user/create')->with("companies",$companies);
 		
@@ -65,6 +65,13 @@ class UserController extends \BaseController {
 
 	public function postCreate()
 	{
+		$u = new User();
+		if (!$u->validate(Input::all())){
+			return Redirect::to('/create-user')
+			            ->with('flash_message', 'User creation failed; please try again.')->withErrors($u->errors())
+			            ->withInput();
+		}
+
 	    $user = new User;
 	    $user->email        = Input::get('email');
 	    $user->password     = Hash::make(Input::get('password'));
@@ -73,20 +80,17 @@ class UserController extends \BaseController {
 	    $user->phone        = Input::get('phone');
 	    $user->company_id   = Input::get('company_id');    
 	    
-	    $u = new User();
 	    try {
-	    	if ($u->validate(Input::all())){
-	    		echo "caca1";
-		        $user->save();
-		        $user_role = new UserRole;
-		        $user_role->user_id =  $user->id;      
-		        $user_role->role_id = Role::where('role', '=', 'user')->first()->id;
-		        $user_role->save();
-	    	} else {
-				return Redirect::to('/create-user')
-					            ->with('flash_message', 'User creation failed; please try again.')->withErrors($u->errors())
-					            ->withInput();
-	    	}	
+	        $user->save();
+	        $user_role = new UserRole;
+	        $user_role->user_id =  $user->id;      
+	        $user_role->role_id = Role::where('role', '=', 'user')->first()->id;
+	        $user_role->save();
+
+			return Redirect::to('/create-user')
+				            ->with('flash_message', 'User creation failed; please try again.')->withErrors($u->errors())
+				            ->withInput();
+	
 	    }
 	    catch (Exception $e) {
 	        return Redirect::to('/create-user')
@@ -95,9 +99,9 @@ class UserController extends \BaseController {
 	    }
 	    
 	    # Log in
-	    Auth::login($user);
+	   	// Auth::login($user);
 	    
-	    return Redirect::to('/list-users')->with('flash_message', 'User created.');
+	    return Redirect::to('/list-users')->with('flash_message', "User $user->firstname created.");
 	}
 
 	/**

@@ -4,11 +4,12 @@ class Incident extends ValidateableEloquent {
 
 	# For validation
 	protected $rules = array(
-        'address' 	=> 'required',
-        'house_number'  	=> 'required',
-        'email'  		=> 'required|email',
-        'company_id'  	=> 'required',
-        'password'  	=> 'required',
+        'address' 		=> 'required',
+        'house_number'  => 'required',
+        'picket_number' => 'required',
+        'hw_address'	=> 'required',
+        'type_id'  		=> 'exists:incident_types,id',
+        'owner_id' 		=> 'exists:companies,id',
     );
 
 
@@ -35,7 +36,13 @@ class Incident extends ValidateableEloquent {
 	    # Tags belongs to many Books
 	    return $this->belongsTo('IncidentType');
     }           
-          
+
+	# Relationship method...
+    public function lamp_type() {
+	    
+	    # Tags belongs to many Books
+	    return $this->belongsTo('LampType');
+    }           
 
 	# Relationship method...
     public function reporter() {

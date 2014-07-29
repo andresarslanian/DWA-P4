@@ -16,68 +16,63 @@
 		{{ Form::open(array('url' => '/create-incident')) }}
 
 			<div class="col-sm-5">
-				<div class="form-group col-sm-12">
+				<div class="form-group col-sm-12 @if($errors->first('address')) has-error @endif">
 				    <label for="address">Address</label>
 					{{ Form::text('address', '', array('class' => 'form-control')) }}
+					<div class="validation-message-error">{{$errors->first('address')}}</div>
 				</div>
-
-
-
-				<div class="form-group col-sm-12">
-				    <label for="hw_address">HW Address</label>
-					{{ Form::text('hw_address', '', array('class' => 'form-control')) }}
-				</div>
-
-								
+							
 				
 				<div class="form-group col-sm-12">
 				    <label for="description">Description</label>
-					{{ Form::text('description', '', array('class' => 'form-control')) }}
+					{{Form::textarea('description','',array('rows' => '5','class' => 'form-control'))}}
 				</div>
 
 
 			</div>
 
 			<div class="col-sm-4">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-6 @if($errors->first('house_number')) has-error @endif">
 				    <label for="house_number">House #</label>
 					{{ Form::text('house_number', '', array('class' => 'form-control')) }}
+					<div class="validation-message-error">{{$errors->first('house_number')}}</div>
 				</div>
 
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-6 @if($errors->first('picket_number')) has-error @endif">
 				    <label for="picket_number">Picket #</label>
 					{{ Form::text('picket_number', '', array('class' => 'form-control')) }}
+					<div class="validation-message-error">{{$errors->first('picket_number')}}</div>
 				</div>	
 
-				<div class="form-group col-sm-12">
-				    <label for="lamp_type">Type of Lamp</label>
-					{{ Form::text('lamp_type', '', array('class' => 'form-control')) }}
+				<div class="form-group col-sm-12 @if($errors->first('hw_address')) has-error @endif">
+				    <label for="hw_address">HW Address</label>
+					{{ Form::text('hw_address', '', array('class' => 'form-control')) }}
+					<div class="validation-message-error">{{$errors->first('hw_address')}}</div>
 				</div>
 
-				<div class="form-group col-sm-12 ">
-				    <label for="state_id">State</label>
-					{{ Form::select('state_id', $states, '', array('class' => 'form-control')) }}
-				</div>				
+
+
 			</div>
 
 			<div class="col-sm-3">
 
-				<div class="form-group col-sm-12 ">
+				<div class="form-group col-sm-12 @if($errors->first('type_id')) has-error @endif">
 				    <label for="type_id">Incident</label>
 					{{ Form::select('type_id', $incidents, '', array('class' => 'form-control')) }}
+					<div class="validation-message-error">{{$errors->first('type_id')}}</div>
 				</div>
 
-				
-				<div class="form-group col-sm-12 ">
+				<div class="form-group col-sm-12 @if($errors->first('owner_id')) has-error @endif">
 				    <label for="owner_id">Owner</label>
 					{{ Form::select('owner_id', $companies, '', array('class' => 'form-control')) }}
+					<div class="validation-message-error">{{$errors->first('owner_id')}}</div>
+				</div>			
+				
+				<div class="form-group col-sm-12 @if($errors->first('lamp_type_id')) has-error @endif">
+				    <label for="lamp_type_id">Lamp Type</label>
+					{{ Form::select('lamp_type_id', $lamp_types, '', array('class' => 'form-control')) }}
+					<div class="validation-message-error">{{$errors->first('lamp_type_id')}}</div>
 				</div>
-
-				<div class="form-group col-sm-12 ">
-				    <label for="action_id">Action</label>
-					{{ Form::select('action_id', $actions, '', array('class' => 'form-control')) }}
-				</div>				
-
 			</div>
 
 			<div class="col-sm-12 center">

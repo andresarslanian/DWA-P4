@@ -22,7 +22,13 @@ class CreateLampsTable extends Migration {
 
 			# General data...
 	        $table->string('serial')->unique();
-	        $table->string('description');	        
+	        $table->string('description')->nullable()->default(null);   
+
+			# FK
+			$table->integer('type_id')->unsigned(); 	# type of light
+
+			# Define foreign keys...
+			$table->foreign('type_id')->references('id')->on('lamp_types');						             
 	    });
 	}
 

@@ -1,20 +1,20 @@
 <?php 
 
-class Lamp extends ValidateableEloquent { 
+class LampType extends ValidateableEloquent { 
 
 	# Enable fillable on the 'name' column so we can use the Model shortcut Create
 	protected $fillable = array('name');
 
-    public function replacements() {
+    public function lamps() {
 	    
 	    # Tags belongs to many Books
-	    return $this->hasMany('Replacement');
+	    return $this->hasMany('Lamp');
     }   
 
 	# Relationship method...
-    public function type() {
+    public function incidents() {
 	    
 	    # Tags belongs to many Books
-	    return $this->belongsTo('LampType');
+	    return $this->hasMany('Incident');
     }      
 }

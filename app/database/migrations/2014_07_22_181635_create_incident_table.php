@@ -26,18 +26,19 @@ class CreateIncidentTable extends Migration {
 			$table->string('house_number');
 			$table->string('picket_number');
 			$table->string('hw_address');
-			$table->string('lamp_type');
 			$table->text('description')->nullable()->default(null);
 
 			# FK
-			$table->integer('type_id')->unsigned(); # type of incident	
-			$table->integer('reporter_id')->unsigned(); # who reports the incident
-			$table->integer('owner_id')->unsigned(); 	# to whom it assigns it
-  			$table->integer('action_id')->unsigned();   # what action was taken
-			$table->integer('state_id')->unsigned(); 	# in what state the incident is
+			$table->integer('type_id')->unsigned(); 								# type of incident	
+			$table->integer('lamp_type_id')->unsigned()->nullable()->default(null); 							# lamp type of incident	
+			$table->integer('reporter_id')->unsigned(); 							# who reports the incident
+			$table->integer('owner_id')->unsigned(); 								# to whom it assigns it
+  			$table->integer('action_id')->unsigned()->nullable()->default(null);   	# what action was taken
+			$table->integer('state_id')->unsigned(); 								# in what state the incident is
 
 			# Define foreign keys...
 			$table->foreign('type_id')->references('id')->on('incident_types');	
+			$table->foreign('lamp_type_id')->references('id')->on('lamp_types');	
 			$table->foreign('reporter_id')->references('id')->on('users');
 			$table->foreign('owner_id')->references('id')->on('companies');						
 			$table->foreign('action_id')->references('id')->on('actions');
