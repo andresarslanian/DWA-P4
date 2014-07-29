@@ -138,6 +138,11 @@ Route::post('list-users/', array('as' => 'user.list', 'before' => 'auth', 'befor
 
 \*--------------------------------------*/
 
+Route::get('/get-environment',function() {
+
+    echo "Environment: ".App::environment();
+
+});
 
 Route::get('mysql-test', function() {
 
