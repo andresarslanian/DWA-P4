@@ -14,4 +14,20 @@ class IncidentType extends Eloquent {
 	    return $this->hasMany('Incident');
     }
     
+
+	public static function getIdNamePair() {
+
+		$incidents    = Array();
+
+		$collection = IncidentType::all();	
+
+		$incidents[]="Select a type";
+
+	    foreach ($collection as $incident) {
+	        $incidents[$incident->id] = $incident->description;
+	    }  
+
+		return $incidents;	
+	}
+ 
 }

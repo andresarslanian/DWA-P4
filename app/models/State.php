@@ -13,10 +13,20 @@ class State extends Eloquent {
 	    # Tags belongs to many Books
 	    return $this->hasMany('Incident');
     }
-    public function replacements() {
+
+	public static function getIdNamePair() {
+
+		$states    = Array();
+
+		$collection = State::all();	
+
+		$states = [];
+
+	    foreach ($collection as $state) {
+	        $states[$state->id] = $state->description;
+	    }  
+
+		return $states;	
+	}
 	    
-	    # Tags belongs to many Books
-	    return $this->hasMany('Replacement');
-    }
-    
 }

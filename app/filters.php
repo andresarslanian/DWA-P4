@@ -43,7 +43,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('auth/login');
+			return Redirect::guest('login');
 		}
 	}
 });
@@ -87,4 +87,22 @@ Route::filter('csrf', function()
 	{
 		throw new Illuminate\Session\TokenMismatchException;
 	}
+});
+
+
+/* Custom Filter for checking permissions*/
+Route::filter('permission', function($route, $request, $value)
+{
+    if (! Entrust::can($value) ) // Checks the current user
+    {
+        return Redirect::to('/');
+    }
+});
+
+Route::filter('role', function($route, $request, $value)
+{
+    if (! Entrust::hasRole($value) ) // Checks the current user
+    {
+        return Redirect::to('/');
+    }
 });

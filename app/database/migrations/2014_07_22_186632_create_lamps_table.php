@@ -26,9 +26,11 @@ class CreateLampsTable extends Migration {
 
 			# FK
 			$table->integer('type_id')->unsigned(); 	# type of light
+			$table->integer('state_id')->unsigned(); 	# type of light
 
 			# Define foreign keys...
-			$table->foreign('type_id')->references('id')->on('lamp_types');						             
+			$table->foreign('type_id')->references('id')->on('lamp_types');	
+			$table->foreign('state_id')->references('id')->on('lamp_states');						             
 	    });
 	}
 

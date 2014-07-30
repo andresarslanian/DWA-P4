@@ -4,16 +4,18 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Zizaco\Entrust\HasRole;
 
 class User extends ValidateableEloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
+	use HasRole; // Add this trait to your user model
 
 	# For validation
 	protected $rules = array(
         'firstname' 	=> 'required',
         'lastname'  	=> 'required',
-        'email'  		=> 'required|email',
+        'email'  		=> 'required|email|unique:users,email',
         'company_id'  	=> 'exists:companies,id',
         'password'  	=> 'required',
     );
@@ -53,10 +55,10 @@ class User extends ValidateableEloquent implements UserInterface, RemindableInte
 	    # Tags belongs to many Books
 	    return $this->belongsTo('Company');
     }    
-
-    public function roles() {
-	    
-	    # Tags belongs to many Books
-	    return $this->hasMany('Role');
-    }               
+        
+	# Relationship method...
+    public function worksFor($company) {
+	    $c_id = Company::where('name','=',$company)->first()->id;
+	    return $this->company->id == $c_id;
+    }                 
 }

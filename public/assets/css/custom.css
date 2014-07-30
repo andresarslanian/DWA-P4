@@ -13,7 +13,7 @@
 	-webkit-box-shadow: 0 3px 8px 3px rgba(0,0,0,0.4);
 	box-shadow: 0 3px 8px 3px rgba(0,0,0,0.4);
 	top: 0px; 
-	position: fixed; 
+/*	position: fixed; */
 	transition: all 0s ease; 
 	-webkit-transition: all 0s ease;
 
@@ -48,7 +48,7 @@ height: 140px;
 }
 
 .navbar-nav>.active>a {
-	background-color: cornflowerblue !important;
+	background-color: rgba(100, 149, 237, 0.3) !important;
 }
 
 .login-alert{
@@ -60,6 +60,9 @@ height: 140px;
 	margin-left: 150px;
 }
 
+.p-nav li:hover{
+	background-color: rgba(100, 149, 237, 0.2) !important;
+}
 .main-container{
 	margin-top: 100px;
 }
@@ -77,10 +80,12 @@ body{
 
 .p-navbar{
 	color: white;	
-	position: fixed;
+/*	position: fixed;*/
 	top: 0;
-	left: 10%;
-	right: 15%;
+/*	left: 10%;
+	right: 15%; */
+margin-left: 10%;
+margin-right: 15%;	
 	background: transparent;
 	border: 0px;
 	border-bottom: 1px solid lightgray;
@@ -124,6 +129,47 @@ body{
 	color:#b94a48;
 }
 
+.chosen-select-lamp{
+	width: 350px; 
+
+}
 textarea {
     resize: none;
+}
+
+.incident-view-container{
+	margin-top: 2%;
+}
+
+.btn-bar{
+	margin-bottom: 20px;
+	padding: 0;
+}
+
+.in-re{
+	color: darkslateblue;
+	text-align: center;
+	background-color: rgba(255,255,255,0.9);
+	border-radius: 10px 10px 0 0px;
+}
+
+.lamp-container{
+	margin-top: 2%;
+}
+
+.lamp-filters{
+	padding-right: 0 !important;
+	margin-right: -55px !important;
+}
+
+.lamp-filters .col-sm-8{
+	margin-bottom: 10px;
+}
+
+.cr-cmp{
+	margin-bottom: 10px;
+}
+
+.done-incident-edit{
+	margin-left: 10px;
 }

@@ -32,11 +32,22 @@
 					<div class="validation-message-error">{{$errors->first('lastname')}}</div>
 				</div>
 
-				<div class="form-group col-sm-12 @if($errors->first('company_id')) has-error @endif ">
-				    <label for="company">Company</label>
-					{{ Form::select('company_id', $companies, '', array('class' => 'form-control')) }}
-					<div class="validation-message-error">{{$errors->first('company_id')}}</div>
+				@if( Auth::user()->can('create_all_users') )
+					<div class="form-group col-sm-12 @if($errors->first('company_id')) has-error @endif ">
+					    <label for="company">Company</label>
+						{{ Form::select('company_id', $companies, '', array('class' => 'form-control')) }}
+						<div class="validation-message-error">{{$errors->first('company_id')}}</div>
+					</div>
+				@elseif (Auth::user()->can('create_users_for_company'))
+					{{Form::hidden('company_id', Auth::user()->company->id)}}
+				@endif
+
+				<div class="form-group col-sm-12 @if($errors->first('role')) has-error @endif ">
+				    <label for="role">Role</label>
+					{{ Form::select('role', $roles, '', array('class' => 'form-control')) }}
+					<div class="validation-message-error">{{$errors->first('role')}}</div>
 				</div>
+
 			</div>
 
 			<div class="col-sm-6">

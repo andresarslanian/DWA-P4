@@ -1,9 +1,14 @@
 <?php 
 
-class UserRole extends Eloquent { 
+class UserRole extends ValidateableEloquent { 
 
 	public $timestamps = false;
-	
+
+	# For validation
+	protected $rules = array(
+        'role' 		=> 'exists:roles,id',
+    );
+
 	# Enable fillable on the 'name' column so we can use the Model shortcut Create
 	protected $fillable = array('name');
 	

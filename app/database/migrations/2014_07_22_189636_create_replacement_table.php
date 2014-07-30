@@ -25,13 +25,11 @@ class CreateReplacementTable extends Migration {
 			$table->integer('user_id')->unsigned(); 	# who makes the replacement
 			$table->integer('incident_id')->unsigned(); # to what incident the replacement corresponds to
 			$table->integer('lamp_id')->unsigned(); 	# which is the new lamp
-			$table->integer('state_id')->unsigned(); 	# in which state the replacement is
 
 			# Define foreign keys...
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->foreign('incident_id')->references('id')->on('incidents');
 			$table->foreign('lamp_id')->references('id')->on('lamps');
-			$table->foreign('state_id')->references('id')->on('states');
 
 	    });
 	}

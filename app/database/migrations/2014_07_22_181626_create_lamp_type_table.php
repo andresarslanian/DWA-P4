@@ -19,7 +19,7 @@ class CreateLampTypeTable extends Migration {
 			$table->increments('id');
 
 			# General data...
-			$table->string('type');
+			$table->string('description');
 
 
 	        

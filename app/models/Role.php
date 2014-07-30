@@ -1,17 +1,26 @@
-<?php 
+<?php
 
-class Role extends Eloquent { 
+use Zizaco\Entrust\EntrustRole;
 
-	public $timestamps = false;
-	
-	# Enable fillable on the 'name' column so we can use the Model shortcut Create
-	protected $fillable = array('name');
-	
-	# Relationship method...
-    public function user_roles() {
-	    
-	    # Tags belongs to many Books
-	    return $this->hasMany('UserRoles');
-    }
-    
+class Role extends EntrustRole
+{
+
+	public static function getIdNamePair() {
+
+		$roles    = Array();
+
+		$collection = Role::all();	
+		if (!Auth::check())
+			return $roles;
+		$roles[]="Select a role";
+		foreach($collection as $role) {
+			if (!Auth::user()->hasRole('Super Admin') && $c->name == 'Super Admin')
+				continue;
+			if ( Auth::user()->hasRole('User') && $c->name == 'Admin')
+				continue;			
+			$roles[$role->id] = $role->name;
+		}	
+
+		return $roles;	
+	}	
 }

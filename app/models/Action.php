@@ -14,4 +14,19 @@ class Action extends Eloquent {
 	    return $this->hasMany('Incident');
     }
     
+	public static function getIdNamePair() {
+
+		$actions    = Array();
+
+		$collection = Action::all();	
+
+		$actions[]="Select an Action";
+
+	    foreach ($collection as $action) {
+	        $actions[$action->id] = $action->description;
+	    }  
+
+		return $actions;	
+	}
+  
 }

@@ -14,7 +14,7 @@
 Route::get('/', function()
 {
     if (Auth::check())
-       return Redirect::to('/list-users');
+       return Redirect::to('/list-incidents');
     else
 	   return View::make('auth/login');
 });
@@ -35,7 +35,7 @@ Route::post('/login', array('before' => 'csrf', 'uses' => 'AuthController@postLo
 # Logout
 Route::get('/logout', 'AuthController@getLogout');
 
-
+Route::controller('password', 'RemindersController');
 
 
 /*--------------------------------------*\
@@ -44,19 +44,23 @@ Route::get('/logout', 'AuthController@getLogout');
 
 \*--------------------------------------*/
 # Get Create
-Route::get('/create-incident', "IncidentController@getCreate");//function() {//array( 'before' => 'guest',function() {
+Route::get('/create-incident', array('before' => 'auth', "uses" => "IncidentController@getCreate"));//function() {//array( 'before' => 'guest',function() {
 
 # Post Create
-Route::post('/create-incident', array('before' => 'csrf', "uses" => "IncidentController@postCreate"));
+Route::post('/create-incident', array('before' => 'auth', 'before' => 'csrf', "uses" => "IncidentController@postCreate"));
 
 # View an Incident
-Route::get('view-incident', array('before' => 'auth', function() {
+Route::get('show-incident/{id?}', array('as' => 'incident.show', 'before' => 'auth', "uses" => "IncidentController@show"));
 
+# Edit an Incident
+Route::get('edit-incident/{id?}', array('as' => 'incident.edit', 'before' => 'auth', "uses" => "IncidentController@edit"));
 
-}));
 
 Route::get('list-incidents/', array('as' => 'incident.list', 'before' => 'auth', 'uses' => 'IncidentController@index'));
 Route::post('list-incidents/', array('as' => 'incident.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'IncidentController@index'));
+
+
+Route::post('update-incident/', array('as' => 'incident.update', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'IncidentController@update'));
 
 
 /*--------------------------------------*\
@@ -65,29 +69,20 @@ Route::post('list-incidents/', array('as' => 'incident.list', 'before' => 'auth'
 
 \*--------------------------------------*/
 
-# Create a Replacement
-Route::get('create-replacement/', array('before' => 'auth', function() {
+# Get Create
+Route::get('/create-replacement', array('before' => 'auth', "uses" => "ReplacementController@create"));
+Route::post('/create-replacement', array('before' => 'auth', "uses" => "ReplacementController@create"));
 
 
-}));
-
-# View a Replacement
-Route::get('view-replacement', array('before' => 'auth', function() {
+# Post Create
+Route::post('/store-replacement', array('before' => 'auth', 'before' => 'csrf', "uses" => "ReplacementController@store"));
 
 
-}));
-
-# List all Replacements
-Route::get('list-replacements', array('before' => 'auth', function() {
-
-
-}));
-
-# Modify a Replacement
-Route::get('modify-replacement', array('before' => 'auth', function() {
+# List
+Route::get('list-replacements/', array('as' => 'replacement.list', 'before' => 'auth', 'uses' => 'ReplacementController@index'));
+Route::post('list-replacements/', array('as' => 'replacement.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'ReplacementController@index'));
 
 
-}));
 
 /*--------------------------------------*\
 
@@ -107,11 +102,9 @@ Route::get('view-lamp', array('before' => 'auth', function() {
 
 }));
 
-# List all Lamps
-Route::get('list-lamps', array('before' => 'auth', function() {
+Route::get('list-lamps/', array('as' => 'lamp.list', 'before' => 'auth', 'uses' => 'LampController@index'));
+Route::post('list-lamps/', array('as' => 'lamp.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'LampController@index'));
 
-
-}));
 
 /*--------------------------------------*\
 
@@ -120,15 +113,35 @@ Route::get('list-lamps', array('before' => 'auth', function() {
 \*--------------------------------------*/
 
 # Get Create
-Route::get('/create-user', "UserController@getCreate");//function() {//array( 'before' => 'guest',function() {
+Route::get('/create-user', array('before' => 'auth', "uses" => "UserController@getCreate"));//function() {//array( 'before' => 'guest',function() {
 
 # Post Create
-Route::post('/create-user', array('before' => 'csrf', "uses" => "UserController@postCreate"));
+Route::post('/create-user', array('before' => 'auth','before' => 'csrf', "uses" => "UserController@postCreate"));
+
+# View an Incident
+Route::get('show-user/{id?}', array('as' => 'user.show', 'before' => 'auth', "uses" => "UserController@show"));
 
 
 # List users
 Route::get('list-users/', array('as' => 'user.list', 'before' => 'auth', 'uses' => 'UserController@index'));
 Route::post('list-users/', array('as' => 'user.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'UserController@index'));
+
+/*--------------------------------------*\
+
+                COMPANY
+
+\*--------------------------------------*/
+
+# Get Create
+Route::get('/create-company', array('before' => 'auth', "uses" => "CompanyController@create"));//function() {//array( 'before' => 'guest',function() {
+
+# Post Create
+Route::post('/create-company', array('before' => 'auth','before' => 'csrf', "uses" => "CompanyController@store"));
+
+
+# List users
+Route::get('list-companies/', array('as' => 'company.list', 'before' => 'auth', 'uses' => 'CompanyController@index'));
+Route::post('list-companies/', array('as' => 'company.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'CompanyController@index'));
 
 
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolesTable extends Migration {
+class CreateLampStateTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,13 @@ class CreateRolesTable extends Migration {
 	 */
 	public function up()
 	{
-	    Schema::create('roles', function($table) {
+	    Schema::create('lamp_states', function($table) {
 
 			# AI, PK
 			$table->increments('id');
 
 			# General data...
-			$table->string('role');
-	        
+			$table->string('description');
 
 	    });
 	}
@@ -31,7 +30,7 @@ class CreateRolesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('roles');
+		Schema::drop('lamp_states');
 	}
 
 }

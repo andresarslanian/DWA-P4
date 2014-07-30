@@ -6,6 +6,7 @@
 	
 	<!-- Bootstrap core CSS -->
 	<link href="<?php echo URL::asset('/assets/css/bootstrap.min.css') ?>" rel="stylesheet">
+	<link href="<?php echo URL::asset('/assets/css/chosen.min.css') ?>" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('/assets/css/custom.css') ?>">
 	
@@ -37,10 +38,22 @@
 			<div class="collapse navbar-collapse" id="navbar-philips">
 				<ul class="nav navbar-nav p-nav">
 					@if(Auth::check())
-						<li class=""><a href="/list-users">Users</a></li>
-						<li><a href="/list-incidents">Incidents</a></li>
-						<li><a href="#">Replacements</a></li>
-						<li><a href="#">Lamps</a></li>
+						@if( Auth::user()->can('view_incidents') )
+							<li><a href="/list-incidents">Incidents</a></li>
+						@endif
+						@if( Auth::user()->can('view_replacements') )						
+							<li><a href="/list-replacements">Replacements</a></li>
+						@endif
+						@if( Auth::user()->can('upload_lamps') && Auth::user()->worksFor('Philips') )	
+							<li><a href="/list-lamps">Lamps</a></li>
+						@endif
+						@if( Auth::user()->can('view_users_for_company'))
+							<li class=""><a href="/list-users">Users</a></li>
+						@endif
+						@if( Auth::user()->can('view_companies'))
+							<li class=""><a href="/list-companies">Companies</a></li>
+						@endif
+						
 					@endif
 				</ul>
 		
@@ -57,12 +70,17 @@
 	</nav>
 
 
-	<div class="continer-fluid main-container">
-		@yield('content')
+	<div class="continer-fluid ">
+		<div class="row">
+			@yield('content')
+		</div>
 	</div>
 
 	<script type="text/javascript" src="<?php echo URL::asset('/assets/js/bootstrap.min.js') ?>"></script>
+	<script type="text/javascript" src="<?php echo URL::asset('/assets/js/chosen.proto.min.js') ?>"></script>
+	<script type="text/javascript" src="<?php echo URL::asset('/assets/js/chosen.jquery.js') ?>"></script>
 	<script type="text/javascript" src="<?php echo URL::asset('/assets/js/custom.js') ?>"></script>
+	
 	@yield('body')
 		
 </body>

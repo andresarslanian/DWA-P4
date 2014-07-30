@@ -14,10 +14,10 @@ class SeedLampTypeTable extends Migration {
 	{
 		DB::table('lamp_types')->insert(
 			array(
-				array('type' => "225W"),
-				array('type' => "110W"),
-				array('type' => "80W"),
-				array('type' => "Metronomist"),
+				array('description' => "225W"),
+				array('description' => "110W"),
+				array('description' => "80W"),
+				array('description' => "Metronomist"),
 				)
 		);
 	}

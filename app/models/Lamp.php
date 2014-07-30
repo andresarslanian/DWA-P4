@@ -16,5 +16,12 @@ class Lamp extends ValidateableEloquent {
 	    
 	    # Tags belongs to many Books
 	    return $this->belongsTo('LampType');
-    }      
+    }
+
+	# Relationship method...
+    public function state() {
+	    
+	    # Tags belongs to many Books
+	    return $this->belongsTo('LampState');
+    }          
 }

@@ -6,7 +6,9 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"paste/pre": "dev-master",
-		"barryvdh/laravel-debugbar": "1.6.*@dev"
+		"barryvdh/laravel-debugbar": "1.6.*@dev",
+		"guzzlehttp/guzzle": "~4.0",
+		"zizaco/entrust": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

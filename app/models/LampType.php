@@ -16,5 +16,21 @@ class LampType extends ValidateableEloquent {
 	    
 	    # Tags belongs to many Books
 	    return $this->hasMany('Incident');
-    }      
+    } 
+
+	public static function getIdNamePair() {
+
+		$lamp_types    = Array();
+
+		$collection = LampType::all();	
+
+		$lamp_types[]="Select a Lamp Type";
+
+	    foreach ($collection as $lamp) {
+	        $lamp_types[$lamp->id] = $lamp->description;
+	    }  
+
+		return $lamp_types;	
+	}
+
 }

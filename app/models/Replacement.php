@@ -1,16 +1,16 @@
 <?php 
 
 class Replacement extends ValidateableEloquent { 
+	
+	# For validation
+	protected $rules = array(
+        'lamp_id' 		=> 'exists:lamps,id',
+    );
 
 	# Enable fillable on the 'name' column so we can use the Model shortcut Create
 	protected $fillable = array('name');
 
-	# Relationship method...
-    public function state() {
-	    
-	    # Tags belongs to many Books
-	    return $this->belongsTo('State');
-    }      
+     
 
 	# Relationship method...
     public function lamp() {

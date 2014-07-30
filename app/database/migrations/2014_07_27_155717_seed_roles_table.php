@@ -14,9 +14,10 @@ class SeedRolesTable extends Migration {
 	{
 		DB::table('roles')->insert(
 			array(
-				array('role' => 'admin'),
-				array('role' => 'user'),
-				array('role' => 'viewer'),                                
+				array('name' => 'Super Admin'),
+				array('name' => 'Admin'),
+				array('name' => 'User'),
+				array('name' => 'Viewer'),                                
 				)
 		);
 	}

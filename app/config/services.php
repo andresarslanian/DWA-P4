@@ -15,17 +15,17 @@ return array(
 	*/
 
 	'mailgun' => array(
-		'domain' => '',
-		'secret' => '',
-	),
+		'domain' => 'sandbox825e8a99f5094f93901193906f17ffb6.mailgun.org',
+		'secret' => 'key-af9df62f7a2ec60d54d955a0f0f5bbf4',
+		),
 
 	'mandrill' => array(
 		'secret' => '',
-	),
+		),
 
 	'stripe' => array(
 		'model'  => 'User',
 		'secret' => '',
-	),
+		),
 
-);
+	);
