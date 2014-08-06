@@ -14,7 +14,7 @@ Philips - Led Replacement Manager
 <div class='flash-message col-sm-3 col-sm-offset-5 login-alert center alert alert-info' role="alert">{{ Session::get('status') }}</div>
 @endif
 <div class="col-sm-offset-5 login-container col-sm-3">
-	Enter your email below and a reminder will be sent there.
+	Enter your email below to reset your password.
 	<form action="{{ action('RemindersController@postRemind') }}" method="POST">
 		<div class="form-group col-sm-12">
 			{{ Form::text('email', '', array('class' => 'form-control')) }}

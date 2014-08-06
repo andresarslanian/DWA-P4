@@ -15,11 +15,6 @@ class AuthController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
-	{
-		return View::make('hello');
-	}
-
 	public function getLogin()
 	{
 		return View::make('auth/login');
@@ -30,7 +25,13 @@ class AuthController extends BaseController {
 		$credentials = Input::only('email', 'password');
 	    
 	    if (Auth::attempt($credentials, $remember = true)) {
-	        return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
+	    	if (Auth::user()->enabled){
+	        	return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
+	    	}
+	        else{
+	        	Auth::logout();
+	        	return Redirect::to('/login')->with('flash_message', 'Log in failed; account suspended. Contact site administrator for re-enabling it.');
+	        }
 	    }
 	    else {
 	        return Redirect::to('/login')->with('flash_message', 'Log in failed; please try again.');

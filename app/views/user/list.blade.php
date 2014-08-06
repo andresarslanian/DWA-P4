@@ -17,7 +17,7 @@ Users
 </div>
 @endif	
 
-<div class="col-sm-8 col-sm-offset-2 signup-container">
+<div class="col-sm-10 col-sm-offset-1 signup-container">
 	@if( Auth::user()->can('create_users_for_company') )
 		<a href="/create-user" class="btn btn-primary col-sm-2">Add new user</a>
 	@endif
@@ -49,6 +49,7 @@ Users
 					@endif
 				</th>
 				<th>Role</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -60,7 +61,13 @@ Users
 				<td>{{$user->phone}}</td>
 				<td>{{$user->email}}</td>
 				<td>{{$user->company->name}}</td>
-
+				<td>{{$user->roles()->first()->name}}</td>
+				<td>
+					<a href="/show-user/{{$user->id}}" class="btn btn-success">View</a>
+					@if( Auth::user()->can('modify_users_for_company'))
+						<a href="/edit-user/{{$user->id}}" class="btn btn-success">Edit</a>
+					@endif
+				</td>				
 			</tr>
 			@endforeach
 		</tbody>		

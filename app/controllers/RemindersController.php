@@ -1,6 +1,6 @@
 <?php
 
-class RemindersController extends Controller {
+class RemindersController extends \BaseController {
 
 
 	public function __construct(){

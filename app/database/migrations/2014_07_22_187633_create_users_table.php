@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration {
 			$table->string('email')->unique();
 			$table->boolean('remember_token');
 			$table->string('password');  
+			$table->boolean('enabled')->default(true);  
 
 			# General data...
 			$table->string('firstname');

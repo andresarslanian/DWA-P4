@@ -13,12 +13,12 @@ class User extends ValidateableEloquent implements UserInterface, RemindableInte
 
 	# For validation
 	protected $rules = array(
-        'firstname' 	=> 'required',
-        'lastname'  	=> 'required',
-        'email'  		=> 'required|email|unique:users,email',
-        'company_id'  	=> 'exists:companies,id',
-        'password'  	=> 'required',
-    );
+		'firstname' 	=> 'required',
+		'lastname'  	=> 'required',
+		'email'  		=> 'required|email|unique:users,email',
+		'company_id'  	=> 'exists:companies,id',
+		'password'  	=> 'required',
+		);
 
 	/**
 	 * The database table used by the model.
@@ -36,29 +36,36 @@ class User extends ValidateableEloquent implements UserInterface, RemindableInte
 
 
 	# Relationship method...
-    public function incidents() {
-	    
+	public function incidents() {
+		
 	    # Tags belongs to many Books
-	    return $this->hasMany('Incident');
-    }       
+		return $this->hasMany('Incident');
+	}       
 
 	# Relationship method...
-    public function reports() {
-	    
+	public function reports() {
+		
 	    # Tags belongs to many Books
-	    return $this->hasMany('Incident');
-    }  
+		return $this->hasMany('Incident');
+	}  
 
 	# Relationship method...
-    public function company() {
-	    
+	public function company() {
+		
 	    # Tags belongs to many Books
-	    return $this->belongsTo('Company');
-    }    
-        
+		return $this->belongsTo('Company');
+	}    
+	
 	# Relationship method...
-    public function worksFor($company) {
-	    $c_id = Company::where('name','=',$company)->first()->id;
-	    return $this->company->id == $c_id;
-    }                 
+	public function worksFor($company) {
+		$c_id = Company::where('name','=',$company)->first()->id;
+		return $this->company->id == $c_id;
+	}   
+
+	public function detachAllRoles()
+	{
+		DB::table('assigned_roles')->where('user_id', $this->id)->delete();
+
+		return $this;
+	}                  
 }

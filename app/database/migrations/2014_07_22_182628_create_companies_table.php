@@ -24,6 +24,7 @@ class CreateCompaniesTable extends Migration {
 			$table->string('name');
 			$table->string('email')->unique();
 			$table->string('phone')->nullable()->default(null);
+			$table->boolean('enabled')->default(true);  
 
 	    });
 

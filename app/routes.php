@@ -118,6 +118,15 @@ Route::get('/create-user', array('before' => 'auth', "uses" => "UserController@g
 # Post Create
 Route::post('/create-user', array('before' => 'auth','before' => 'csrf', "uses" => "UserController@postCreate"));
 
+# Get Create
+Route::get('/edit-user/{id?}', array('before' => 'auth', "uses" => "UserController@getEdit"));//function() {//array( 'before' => 'guest',function() {
+
+# Post Create
+Route::post('/edit-user', array('before' => 'auth','before' => 'csrf', "uses" => "UserController@postEdit"));
+
+# Post Delete
+Route::post('/delete-user', array('before' => 'auth','before' => 'csrf', "uses" => "UserController@destroy"));
+
 # View an Incident
 Route::get('show-user/{id?}', array('as' => 'user.show', 'before' => 'auth', "uses" => "UserController@show"));
 
@@ -137,6 +146,18 @@ Route::get('/create-company', array('before' => 'auth', "uses" => "CompanyContro
 
 # Post Create
 Route::post('/create-company', array('before' => 'auth','before' => 'csrf', "uses" => "CompanyController@store"));
+
+# View an Incident
+Route::get('show-company/{id?}', array('as' => 'company.show', 'before' => 'auth', "uses" => "CompanyController@show"));
+
+# Get Create
+Route::get('/edit-company/{id?}', array('before' => 'auth', "uses" => "CompanyController@edit"));//function() {//array( 'before' => 'guest',function() {
+
+# Post Create
+Route::post('/edit-company', array('before' => 'auth','before' => 'csrf', "uses" => "CompanyController@update"));
+
+# Post Delete
+Route::post('/delete-company', array('before' => 'auth','before' => 'csrf', "uses" => "CompanyController@destroy"));
 
 
 # List users

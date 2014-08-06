@@ -29,8 +29,8 @@
 					<a class="p-refresh " href="" >
                         
                     </a>
-                    <a href="#" >
-                        <span class="p-long"><br>&nbsp;&nbsp;&nbsp;Argentina</span>
+                    <a href="http://www.lighting.philips.com.ar/projects/caba.wpd" target="_blank" class="nav-country">
+                        <span class="p-long"><br>Argentina</span>
                     </a>
 				</div>
 			</div>

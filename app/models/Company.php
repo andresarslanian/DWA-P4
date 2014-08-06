@@ -4,19 +4,19 @@ class Company extends ValidateableEloquent {
 	
 	# For validation
 	protected $rules = array(
-        'name' 	=> 'required',
-        'email' => 'required|email',
-    );
+		'name' 	=> 'required',
+		'email' => 'required|email',
+		);
 
 	# Enable fillable on the 'name' column so we can use the Model shortcut Create
 	protected $fillable = array('name');
 	
 	# Relationship method...
-    public function users() {
-	    
+	public function users() {
+
 	    # Tags belongs to many Books
-	    return $this->hasMany('User');
-    }
+		return $this->hasMany('User');
+	}
 
 	public static function getOwnerIdNamePair() {
 
@@ -30,7 +30,8 @@ class Company extends ValidateableEloquent {
 		$companies[]="Select an owner";
 		if (Auth::user()->worksFor('Philips')){
 			foreach($collection as $company) {
-				$companies[$company->id] = $company->name;
+				if ($company->enabled)
+					$companies[$company->id] = $company->name;
 			}	
 		} else {
 			$c = Company::where('name','=','Philips')->first();
@@ -39,6 +40,16 @@ class Company extends ValidateableEloquent {
 		}
 
 		return $companies;	
-	}		        
-    
+	}
+
+	public static function getIdNamePair() {
+
+		$companies    = Array();
+
+		$companies = Company::getOwnerIdNamePair();
+		$companies[0] = "Select a company";
+
+		return $companies;	
+	}			        
+
 }

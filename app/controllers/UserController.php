@@ -49,9 +49,10 @@ class UserController extends \BaseController {
 	    	# All the results
 			if ( Auth::user()->worksFor('Philips') && Auth::user()->can('view_all_users') ){
 	    		#View all incidents
-				$users = User::orderBy($sortby, $order)->with('company')->paginate($this->maxEntries);
+				$users = User::orderBy($sortby, $order)->with('company')->where('users.enabled','=', true)->paginate($this->maxEntries);
 			} else {
 				$users = User::orderBy($sortby, $order)->with('company')
+				->where('users.enabled','=', true)
 				->whereHas('company', function($q) { 
 					$q->where('id', '=', Auth::user()->company->id);
 				})
@@ -77,7 +78,7 @@ class UserController extends \BaseController {
 			$companies[$c->id] = $c->name;
 		}
 
-		return View::make('user/create')->with("companies",$companies)->with("roles",Role::getIdNamePair());
+		return View::make('user/create')->with("companies",Company::getIdNamePair())->with("roles",Role::getIdNamePair());
 		
 	}
 
@@ -155,7 +156,7 @@ class UserController extends \BaseController {
 			return Redirect::to('/list-users');
 		}
 
-		$user = User::with('company','roles.role')->find($id);
+		$user = User::with('company','roles')->find($id);
 
 		return View::make('user/show')
 		->with('user', $user);
@@ -168,10 +169,68 @@ class UserController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function getEdit($id)
 	{
 		//
+		$this->beforeFilter('permission:modify_users_for_company');
+		if ($id == 0){
+			return Redirect::to('/list-users');
+		}
+
+		$user = User::with('company','roles')->find($id);
+
+		return View::make('user/edit')
+		->with('user', $user)
+		->with("roles",Role::getIdNamePair());
+
+
 	}
+
+	public function postEdit()
+	{
+		//
+
+		$this->beforeFilter('permission:modify_users_for_company');
+		$user_id = Input::get('user_id');
+		if ( !Auth::user()->can('modify_all_users') ){
+			if ( Auth::user()->company->id != Input::get('company_id')){
+				return Redirect::to("/edit-user/$user_id")
+				->with('flash_message', 'User could not be updated; please try again.')
+				->withInput();	
+			}
+		}
+
+		$r = new UserRole();
+		if (!$r->validate( array('role' => Input::get('role')))){
+			return Redirect::to("/edit-user/$user_id")
+			->with('flash_message', 'User could not be updated; please try again.')->withErrors($r->errors())
+			->withInput();
+		}
+
+		$user = User::find(Input::get('user_id'));
+
+		try {
+			$user->firstname    = Input::get('firstname');
+			$user->lastname     = Input::get('lastname');
+			$user->phone        = Input::get('phone');
+
+			$user->save();
+			$user->detachAllRoles();
+			$user->roles()->attach( Input::get('role') );
+		}
+		catch (Exception $e) {
+
+			return Redirect::to("/edit-user/$user_id")
+			->with('flash_message', 'User could not be updated; please try again.')->withErrors($u->errors())
+			->withInput();
+		}
+
+	    # Log in
+	   	// Auth::login($user);
+
+		return Redirect::to("/show-user/$user_id")->with('flash_message', "User $user->firstname updated.");
+
+	}	
 
 
 	/**
@@ -180,9 +239,39 @@ class UserController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function destroy()
 	{
 		//
+		$this->beforeFilter('permission:modify_users_for_company');
+		$user_id = Input::get('user_id');
+		$user = User::find($user_id);
+
+		if ($user_id == 0 || !$user){
+			return Redirect::to('/list-users');
+		}
+
+		if ( !Auth::user()->can('modify_all_users') ){
+			if ( Auth::user()->company->id != $user->company->id){
+				return Redirect::to("/edit-user/$user_id")
+				->with('flash_message', 'User could not be deleted; please try again.')
+				->withInput();	
+			}
+		}
+
+		#Delete the user
+		$user->enabled = false;
+
+	    try {
+	        $user->save();
+	    }
+	    catch (Exception $e) {
+	        return Redirect::to("/edit-user/$user")
+	            ->with('flash_message', 'User could not be deleted; please try again.')
+	            ->withInput();
+	    }
+
+		return Redirect::to("/list-users")->with('flash_message', "User $user->firstname deleted.");
+
 	}
 
 
