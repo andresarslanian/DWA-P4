@@ -14,9 +14,9 @@ class Role extends EntrustRole
 			return $roles;
 		$roles[]="Select a role";
 		foreach($collection as $role) {
-			if (!Auth::user()->hasRole('Super Admin') && $c->name == 'Super Admin')
+			if (!Auth::user()->hasRole('Super Admin') && $role->name == 'Super Admin')
 				continue;
-			if ( Auth::user()->hasRole('User') && $c->name == 'Admin')
+			if ( Auth::user()->hasRole('User') && $role->name == 'Admin')
 				continue;			
 			$roles[$role->id] = $role->name;
 		}	

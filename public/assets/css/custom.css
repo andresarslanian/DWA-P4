@@ -103,7 +103,7 @@ height: 140px;*/
 }
 
 .login-alert{
-	margin-top: 2%;
+	margin-top: -7%;
 	margin-bottom: -10%;
 }
 
@@ -276,3 +276,6 @@ textarea {
 	color: #e86741;
 }
 
+.alert-info{
+	margin-top: -7%;
+}
