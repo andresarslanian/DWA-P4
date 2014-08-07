@@ -2,6 +2,7 @@
 
 return array(
 
+	'debug_bar' => true,
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode

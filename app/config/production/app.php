@@ -2,6 +2,6 @@
 # app/config/production/app.php
 return array(
 
-    'debug' => true,
+    'debug' => false,
 
 );

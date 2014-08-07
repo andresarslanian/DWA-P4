@@ -2,6 +2,8 @@
 
 return array(
 
+	'debug_bar' => false,
+
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
@@ -192,7 +194,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Pre'			  => 'Paste\Pre',
 		'Entrust'    	  => 'Zizaco\Entrust\EntrustFacade',
-
+		'Debugbar' 		  => 'Barryvdh\Debugbar\Facade',
 	),
 
 );
