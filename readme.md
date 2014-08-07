@@ -75,6 +75,7 @@ Finally the blue modules that are the core of the application:
 ## User Access
 
 For accessing the site, here are the credentials:
+
 1)
 Email: test@mydomain.com
 Pass: test
