@@ -44,23 +44,23 @@ Route::controller('password', 'RemindersController');
 
 \*--------------------------------------*/
 # Get Create
-Route::get('/create-incident', array('before' => 'auth', "uses" => "IncidentController@getCreate"));//function() {//array( 'before' => 'guest',function() {
+Route::get('/create-incident', array("uses" => "IncidentController@getCreate"));//function() {//array( 'before' => 'guest',function() {
 
 # Post Create
-Route::post('/create-incident', array('before' => 'auth', 'before' => 'csrf', "uses" => "IncidentController@postCreate"));
+Route::post('/create-incident', array("uses" => "IncidentController@postCreate"));
 
 # View an Incident
-Route::get('show-incident/{id?}', array('as' => 'incident.show', 'before' => 'auth', "uses" => "IncidentController@show"));
+Route::get('show-incident/{id?}', array('as' => 'incident.show', "uses" => "IncidentController@show"));
 
 # Edit an Incident
-Route::get('edit-incident/{id?}', array('as' => 'incident.edit', 'before' => 'auth', "uses" => "IncidentController@edit"));
+Route::get('edit-incident/{id?}', array('as' => 'incident.edit', "uses" => "IncidentController@edit"));
 
 
-Route::get('list-incidents/', array('as' => 'incident.list', 'before' => 'auth', 'uses' => 'IncidentController@index'));
-Route::post('list-incidents/', array('as' => 'incident.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'IncidentController@index'));
+Route::get('list-incidents/', array('as' => 'incident.list', 'uses' => 'IncidentController@index'));
+Route::post('list-incidents/', array('as' => 'incident.list', 'uses' => 'IncidentController@index'));
 
 
-Route::post('update-incident/', array('as' => 'incident.update', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'IncidentController@update'));
+Route::post('update-incident/', array('as' => 'incident.update', 'uses' => 'IncidentController@update'));
 
 
 /*--------------------------------------*\
@@ -70,17 +70,17 @@ Route::post('update-incident/', array('as' => 'incident.update', 'before' => 'au
 \*--------------------------------------*/
 
 # Get Create
-Route::get('/create-replacement', array('before' => 'auth', "uses" => "ReplacementController@create"));
-Route::post('/create-replacement', array('before' => 'auth', "uses" => "ReplacementController@create"));
+Route::get('/create-replacement', array("uses" => "ReplacementController@create"));
+Route::post('/create-replacement', array("uses" => "ReplacementController@create"));
 
 
 # Post Create
-Route::post('/store-replacement', array('before' => 'auth', 'before' => 'csrf', "uses" => "ReplacementController@store"));
+Route::post('/store-replacement', array("uses" => "ReplacementController@store"));
 
 
 # List
-Route::get('list-replacements/', array('as' => 'replacement.list', 'before' => 'auth', 'uses' => 'ReplacementController@index'));
-Route::post('list-replacements/', array('as' => 'replacement.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'ReplacementController@index'));
+Route::get('list-replacements/', array('as' => 'replacement.list', 'uses' => 'ReplacementController@index'));
+Route::post('list-replacements/', array('as' => 'replacement.list', 'uses' => 'ReplacementController@index'));
 
 
 
@@ -91,19 +91,19 @@ Route::post('list-replacements/', array('as' => 'replacement.list', 'before' => 
 \*--------------------------------------*/
 
 # Create a Lamp
-Route::get('create-lamp/', array('before' => 'auth', function() {
+Route::get('create-lamp/', array( function() {
 
 
 }));
 
 # View a Lamp
-Route::get('view-lamp', array('before' => 'auth', function() {
+Route::get('view-lamp', array( function() {
 
 
 }));
 
-Route::get('list-lamps/', array('as' => 'lamp.list', 'before' => 'auth', 'uses' => 'LampController@index'));
-Route::post('list-lamps/', array('as' => 'lamp.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'LampController@index'));
+Route::get('list-lamps/', array('as' => 'lamp.list', 'uses' => 'LampController@index'));
+Route::post('list-lamps/', array('as' => 'lamp.list', 'uses' => 'LampController@index'));
 
 
 /*--------------------------------------*\
@@ -113,27 +113,27 @@ Route::post('list-lamps/', array('as' => 'lamp.list', 'before' => 'auth', 'befor
 \*--------------------------------------*/
 
 # Get Create
-Route::get('/create-user', array('before' => 'auth', "uses" => "UserController@getCreate"));//function() {//array( 'before' => 'guest',function() {
+Route::get('/create-user', array("uses" => "UserController@getCreate"));//function() {//array( 'before' => 'guest',function() {
 
 # Post Create
-Route::post('/create-user', array('before' => 'auth','before' => 'csrf', "uses" => "UserController@postCreate"));
+Route::post('/create-user', array("uses" => "UserController@postCreate"));
 
 # Get Create
-Route::get('/edit-user/{id?}', array('before' => 'auth', "uses" => "UserController@getEdit"));//function() {//array( 'before' => 'guest',function() {
+Route::get('/edit-user/{id?}', array("uses" => "UserController@getEdit"));//function() {//array( 'before' => 'guest',function() {
 
 # Post Create
-Route::post('/edit-user', array('before' => 'auth','before' => 'csrf', "uses" => "UserController@postEdit"));
+Route::post('/edit-user', array("uses" => "UserController@postEdit"));
 
 # Post Delete
-Route::post('/delete-user', array('before' => 'auth','before' => 'csrf', "uses" => "UserController@destroy"));
+Route::post('/delete-user', array("uses" => "UserController@destroy"));
 
 # View an Incident
-Route::get('show-user/{id?}', array('as' => 'user.show', 'before' => 'auth', "uses" => "UserController@show"));
+Route::get('show-user/{id?}', array('as' => 'user.show', "uses" => "UserController@show"));
 
 
 # List users
-Route::get('list-users/', array('as' => 'user.list', 'before' => 'auth', 'uses' => 'UserController@index'));
-Route::post('list-users/', array('as' => 'user.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'UserController@index'));
+Route::get('list-users/', array('as' => 'user.list', 'uses' => 'UserController@index'));
+Route::post('list-users/', array('as' => 'user.list', 'uses' => 'UserController@index'));
 
 /*--------------------------------------*\
 
@@ -142,27 +142,27 @@ Route::post('list-users/', array('as' => 'user.list', 'before' => 'auth', 'befor
 \*--------------------------------------*/
 
 # Get Create
-Route::get('/create-company', array('before' => 'auth', "uses" => "CompanyController@create"));//function() {//array( 'before' => 'guest',function() {
+Route::get('/create-company', array("uses" => "CompanyController@create"));//function() {//array( 'before' => 'guest',function() {
 
 # Post Create
-Route::post('/create-company', array('before' => 'auth','before' => 'csrf', "uses" => "CompanyController@store"));
+Route::post('/create-company', array("uses" => "CompanyController@store"));
 
-# View an Incident
-Route::get('show-company/{id?}', array('as' => 'company.show', 'before' => 'auth', "uses" => "CompanyController@show"));
+# View a Company
+Route::get('show-company/{id?}', array('as' => 'company.show', "uses" => "CompanyController@show"));
 
 # Get Create
-Route::get('/edit-company/{id?}', array('before' => 'auth', "uses" => "CompanyController@edit"));//function() {//array( 'before' => 'guest',function() {
+Route::get('/edit-company/{id?}', array("uses" => "CompanyController@edit"));//function() {//array( 'before' => 'guest',function() {
 
 # Post Create
-Route::post('/edit-company', array('before' => 'auth','before' => 'csrf', "uses" => "CompanyController@update"));
+Route::post('/edit-company', array("uses" => "CompanyController@update"));
 
 # Post Delete
-Route::post('/delete-company', array('before' => 'auth','before' => 'csrf', "uses" => "CompanyController@destroy"));
+Route::post('/delete-company', array("uses" => "CompanyController@destroy"));
 
 
-# List users
-Route::get('list-companies/', array('as' => 'company.list', 'before' => 'auth', 'uses' => 'CompanyController@index'));
-Route::post('list-companies/', array('as' => 'company.list', 'before' => 'auth', 'before' => 'csrf', 'uses' => 'CompanyController@index'));
+# List Companies
+Route::get('list-companies/', array('as' => 'company.list', 'uses' => 'CompanyController@index'));
+Route::post('list-companies/', array('as' => 'company.list', 'uses' => 'CompanyController@index'));
 
 
 

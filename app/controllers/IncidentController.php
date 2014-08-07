@@ -9,6 +9,7 @@ class IncidentController extends \BaseController {
 		
 		parent::__construct();
 		$this->beforeFilter('permission:view_incidents');
+		$this->beforeFilter('auth');		
 	}
 
 	

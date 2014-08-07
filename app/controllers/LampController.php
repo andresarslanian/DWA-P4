@@ -9,6 +9,7 @@ class LampController extends \BaseController {
 		
 		parent::__construct();
 		$this->beforeFilter('permission:upload_lamps');
+		$this->beforeFilter('auth');
 	}
 
 

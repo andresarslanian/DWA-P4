@@ -9,6 +9,7 @@ class CompanyController extends \BaseController {
 		
 		parent::__construct();
 		$this->beforeFilter('permission:view_companies');
+		$this->beforeFilter('auth');
 	}
 
 

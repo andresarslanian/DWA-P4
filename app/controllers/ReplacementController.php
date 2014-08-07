@@ -9,6 +9,7 @@ class ReplacementController extends \BaseController {
 		
 		parent::__construct();
 		$this->beforeFilter('permission:view_replacements');
+		$this->beforeFilter('auth');
 	}
 
 

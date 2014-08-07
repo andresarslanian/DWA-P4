@@ -9,6 +9,7 @@ class UserController extends \BaseController {
 		
 		parent::__construct();
 		$this->beforeFilter('permission:view_users_for_company');
+		$this->beforeFilter('auth');
 	}
 
 

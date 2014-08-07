@@ -132,5 +132,5 @@ I hope you enjoy it!.
 * The lamps will be uploaded from a csv file. It is still not implemented since the columns have not been yet defined.
 * When an incident is created, although the development includes working methods that send mails, I'm still not sending them since it hasn't been yet defined the actions that shoot an email.
 * Minor improvements that haven't yet been defined as for example, when a Replacement is created, being able to write down the old and the new serial numbers of the lamps. This yet has to be defined.
-
+* Implementing Tests!
 
