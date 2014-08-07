@@ -27,7 +27,7 @@ class SeedUsersTable extends Migration {
 
 		DB::table('users')->insert(
 			array(
-				array('email' => 'andres.arslanian@gmail.com', 
+				array('email' => 'test@mydomain.com', 
 					  'password'=>Hash::make('test'), 
 					  'firstname'=>'Andres', 
 					  'lastname'=>'Arslanian', 
@@ -39,7 +39,7 @@ class SeedUsersTable extends Migration {
 					  'lastname'=>'Thompson', 
 					  'phone'=> '948 929 2993', 
 					  'company_id' => $philips),
-				array('email' => 'aarslanian@fas.harvard.edu', 
+				array('email' => 'test@company.com', 
 					  'password'=>Hash::make('test'), 
 					  'firstname'=>'Mark', 
 					  'lastname'=>'Robson', 
