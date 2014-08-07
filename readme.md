@@ -8,7 +8,7 @@ Philips has two big jobs: one is the installation of the lights and the other on
 
 The challenge they have is documenting and tracking correctly which lights have been replaced, where they are installed, to know why they had to be substituted, etc.  Actually, they do this with Excel sheets, having with each of the 6 maintainers a different Excel sheet, each with their own style and information.
 
-I was asked to make a web application for them, very similar to a ticketing system. The idea is to have a place where to report incidents, the action taken with that incidents and finally save if a light was replaced or not.
+I was asked to make a web application for them, very similar to a ticketing system. The idea is to have a place where to report incidents, the action taken with those incidents and finally save if a light was replaced or not.
 
 The application should have:
 - Different access levels.
@@ -72,11 +72,45 @@ Finally the blue modules that are the core of the application:
 - An incident can have many replacements, for example a whole block had a power problem and all the lights were burnt.
 
 
+** User Access
 
-*** Pending
+For accessing the site, here are the credentials:
+1)
+Email: test@mydomain.com
+Pass: test
+Role: Super Admin
+Company: Philips
+
+2)
+Email: robert.thompson@mycompany.com
+Pass: test
+Role: User
+Company: Philips
+
+3)
+Email: test@company.com
+Pass: test
+Role: Admin
+Company: Autotrol
+
+4)
+Email: mary.nice@mycompany.com
+Pass: test
+Role: Viewer
+Company: Autotrol
+
+
+Unless you find any bugs, the site is ready to be used (well, as soon as I solve some pending points), but the core at least is working.
+
+
+I hope you enjoy it!.
+
+
+** Pending
 
 * Comments in the code are still very poor :(
 * The lamps will be uploaded from a csv file. It is still not implemented since the columns have not been yet defined.
 * When an incident is created, although the development includes working methods that send mails, I'm still not sending them since it hasn't been yet defined the actions that shoot an email.
 * Minor improvements that haven't yet been defined as for example, when a Replacement is created, being able to write down the old and the new serial numbers of the lamps. This yet has to be defined.
+
 
