@@ -2,31 +2,81 @@
 
 ## by Andres Arslanian
 
+In Buenos Aires, Argentina (city and country where I was born and live), there's an ongoing project of Philips to replace all the lights of the streets by LED lights, allowing to save more than 50% in energy consumption of the lights (to read more about the project here's a link http://www.newscenter.philips.com/main/standard/news/press/2013/20131016-philips-renews-the-street-lighting-system-of-buenos-aires-with-led-technology.wpd#.U-OJOIBdXIo).
+
+Philips has two big jobs: one is the installation of the lights and the other one is the maintenance of them, replacing them when they break, etc.  For the maintenance, they sub-contract 6 different companies that are responsible of each zone of the city.
+
+The challenge they have is documenting and tracking correctly which lights have been replaced, where they are installed, to know why they had to be substituted, etc.  Actually, they do this with Excel sheets, having with each of the 6 maintainers a different Excel sheet, each with their own style and information.
+
+I was asked to make a web application for them, very similar to a ticketing system. The idea is to have a place where to report incidents, the action taken with that incidents and finally save if a light was replaced or not.
+
+The application should have:
+- Different access levels.
+- Different scope of what each company can see, maintaining confidentiality between companies.
+- Be able to assign a owner to an incident and send an email when the incident is created.
+- When a replacement is created, allow the users to select the serial of a lamp of the available lamps in the warehouse and not any serial number, minimizing the error of the users.
+- Have a centralized managing system of the incidents and replacements.
+
+So I thought why not implement it in Laravel!
+
+First I designed my UML according to the next image:
+
 ![Alt text](https://github.com/andresarslanian/DWA-P4/blob/master/public/assets/images/DWA_P4.png "UML")
 
 
-## Laravel PHP Framework
+The different permission levels I solved it with a package ('entrust') that added the tables shown in green and added functionality in the code such as checking if a user has a permission or not.
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+With this I created the following roles that have the following permissions:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+Viewer Role:
+----------
+ * 'view_incidents'
+ * 'view_replacements'
+ * 'export_data'
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+User Role:
+----------
+ * 'create_incidents'
+ * 'create_replacements'
+ * 'modify_incident'
+ * 'upload_lamps'				 	//* For Philips employees
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Admin Role:
+-----------
+ * 'create_users_for_company'
+ * 'modify_users_for_company'
+ * 'view_users_for_company'
+ * 'view_all_incidents' 			//* For Philips employees
+ * 'view_all_replacements' 			//* For Philips employees
 
-## Official Documentation
+Super Admin Role:
+-----------------
+ * 'create_all_users'
+ * 'create_companies'
+ * 'view_companies'
+ * 'view_all_users'
+ * 'modify_companies'
+ * 'modify_all_users'
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+The idea is that the lower roles inherit all the permissions of upper roles, so basically the Super Admin can do everything.
 
-### Contributing To Laravel
+Considering these permission levels, different actions can be taken based in the permission assigned. The idea behind this is to give them a system that can be maintained and managed by them. So a Super Admin is intended to be only of Philips and allow him to manage users of every company and companies themselves. 
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
+At the same time, give them the chance to give the Maintenance Companies the possibility of being administrators of their company.
 
-### License
+Next, all the modules that appear in Orange are just reference tables.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Finally the blue modules that are the core of the application:
+
+- Users create incidents and assign them to an owner (a company, that will receive a mail that the incident has been created).
+- An incident can have many replacements, for example a whole block had a power problem and all the lights were burnt.
+
+
+
+*** Pending
+
+* Comments in the code are still very poor :(
+* The lamps will be uploaded from a csv file. It is still not implemented since the columns have not been yet defined.
+* When an incident is created, although the development includes working methods that send mails, I'm still not sending them since it hasn't been yet defined the actions that shoot an email.
+* Minor improvements that haven't yet been defined as for example, when a Replacement is created, being able to write down the old and the new serial numbers of the lamps. This yet has to be defined.
+
