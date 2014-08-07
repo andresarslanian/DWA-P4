@@ -106,7 +106,7 @@ Unless you find any bugs, the site is ready to be used (well, as soon as I solve
 I hope you enjoy it!.
 
 
-### Pending
+## Pending
 
 * Comments in the code are still very poor :(
 * The lamps will be uploaded from a csv file. It is still not implemented since the columns have not been yet defined.
