@@ -6,11 +6,18 @@ Replacements
 
 @section('content')
 
-<div class="col-sm-offset-5 col-sm-7">
-	<h1>Replacements</h1>
-</div>
 
-<div class="col-sm-10 col-sm-offset-1 signup-container">
+<div class="p-body-wrapper col-sm-10 col-sm-offset-1">
+	<div class="col-sm-12 center page-title">
+		<h1>Replacements</h1>
+	</div>
+
+	@if(Session::get('flash_message'))
+	<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info alert-dismissible' role="alert">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		{{ Session::get('flash_message') }}
+	</div>
+	@endif
 
 	@if( Auth::user()->worksFor('Philips') )
 	{{ Form::open(array('url' => '/list-replacements', 'class' => 'form-horizontal','method' => 'POST')) }}

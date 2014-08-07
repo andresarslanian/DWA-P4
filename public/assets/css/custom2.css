@@ -31,14 +31,12 @@
 
 .p-logo:before {
 content: '';
-/*background: url('/assets/images/sprite-header-rebrand.png') 0 0;*/
-background: url('/assets/images/mainlogo.gif');
-/*
+background: url('/assets/images/sprite-header-rebrand.png') 0 0;
 position: absolute;
 left: 0;
 top: 0;
 width: 140px;
-height: 140px;*/
+height: 140px;
 }
 
 .center{
@@ -79,52 +77,29 @@ body{
 	color: white;
 }
 
-nav{
-	border: 0 !important;
-	border-radius: 0 !important;
-}
-
-nav li a{
-	padding-bottom: 9px !important;
-}
-#p-header{
-	background: white;
-}
-#p-mainlogo {
-float: left;
-margin: 23px 0 0 0;
-display: inline;
-}
-
-#p-header-wrapper {
-background-color: #FFF;
-padding: 0 13px;
-width: 986px;
-widt\h: 960px;
-height: 68px;
-margin: auto;
-text-align: left;
-}
-.p-clearfix {
-display: block;
-}
 
 .p-navbar{
 	color: white;	
 /*	position: fixed;*/
-
+	top: 0;
 /*	left: 10%;
-	right: 15%; 
+	right: 15%; */
 margin-left: 10%;
 margin-right: 15%;	
-	background: transparent;*/
-background: url(http://www.lighting.philips.com/images/nav_site_sprite_horizontal.png) repeat-x scroll 0 0 transparent;
-min-height: 22px;
-min-width: 986px;
-width: 100%;
-text-align: center;
+	background: transparent;
+	border: 0px;
+	border-bottom: 1px solid lightgray;
+	border-radius: 0;	
 }
 
+.nav-country{
+	position: absolute;
+	left: 30px;
+}
+
+.status-td{
+	vertical-align: middle !important;
+}
 .p-navbar li a{
 	color: white !important;	
 }
@@ -205,4 +180,16 @@ textarea {
 
 .done-incident-edit{
 	margin-left: 10px;
+}
+
+.modal-body{
+	color: darkslateblue;
+}
+
+.modal-header{
+	color: #e86741;
+}
+
+.auth-pswd a{
+	color: aquamarine !important; 
 }

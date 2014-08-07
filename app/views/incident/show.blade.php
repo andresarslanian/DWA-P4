@@ -5,15 +5,17 @@ View Incident
 @stop
 
 @section('content')
+	
+<div class=" p-body-wrapper col-sm-10 col-sm-offset-1 incident-view-container">
+	<div class="col-sm-12 center page-title">
+		<h1>Incidents {{$incident->id}}</h1>
+	</div>
 
-<div class="col-sm-offset-5 col-sm-4">
-	<h1>Incident {{$incident->id}}</h1>
-</div>
+	@if(Session::get('flash_message'))
+	<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info' role="alert">{{ Session::get('flash_message') }}</div>
+	@endif
 
-@if(Session::get('flash_message'))
-<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info' role="alert">{{ Session::get('flash_message') }}</div>
-@endif		
-<div class="col-sm-10 col-sm-offset-1 incident-view-container">
+
 	<div class="col-sm-12 btn-bar">
 		<a class="btn btn-info" href="/list-incidents">View All</a>
 		@if( Auth::user()->can('modify_incident'))

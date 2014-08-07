@@ -30,17 +30,19 @@ Edit User
 </div>
 
 
-<div class="col-sm-offset-5 col-sm-7">
-	<h1>Edit User</h1>
-</div>
 
-@if(Session::get('flash_message'))
-<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info' role="alert">{{ Session::get('flash_message') }}</div>
-@endif		
+<div class="p-body-wrapper col-sm-8 col-sm-offset-2">
 
-<div class="col-sm-8 col-sm-offset-2 signup-container forms-container">
+	<div class="col-sm-12 center page-title">
+		<h1>Edit User</h1>
+	</div>
 
-
+	@if(Session::get('flash_message'))
+	<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info alert-dismissible' role="alert">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		{{ Session::get('flash_message') }}
+	</div>
+	@endif
 	{{ Form::open(array('url' => '/edit-user')) }}
 	{{Form::hidden('user_id',$user->id)}}
 	<div class="col-sm-6 " >

@@ -6,14 +6,16 @@ Incidents
 
 @section('content')
 
-<div class="col-sm-offset-5 col-sm-7">
-	<h1>Incidents</h1>
-</div>
+<div class=" p-body-wrapper col-sm-10 col-sm-offset-1 ">
+	<div class="col-sm-12 center page-title">
+		<h1>Incidents</h1>
+	</div>
 
-@if(Session::get('flash_message'))
-<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info' role="alert">{{ Session::get('flash_message') }}</div>
-@endif	
-<div class="col-sm-10 col-sm-offset-1 signup-container">
+	@if(Session::get('flash_message'))
+	<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info' role="alert">{{ Session::get('flash_message') }}</div>
+	@endif
+
+
 	@if( Auth::user()->can('create_incidents') )
 	<a href="/create-incident" class="btn btn-primary col-sm-2">Add new incident</a>
 	@endif
@@ -73,7 +75,7 @@ Incidents
 				<td>
 					<a href="/show-incident/{{$incident->id}}" class="btn btn-success">View</a>
 					@if( Auth::user()->can('modify_incident'))
-						<a href="/edit-incident/{{$incident->id}}" class="btn btn-success">Edit</a>
+					<a href="/edit-incident/{{$incident->id}}" class="btn btn-success">Edit</a>
 					@endif
 				</td>
 			</tr>

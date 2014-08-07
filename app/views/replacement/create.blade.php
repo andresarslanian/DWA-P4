@@ -6,14 +6,20 @@
 
 @section('content')
 
-	<div class="col-sm-offset-5 col-sm-7">
-	<h1>Create Replacement</h1>
+	
+	<div class="p-body-wrapper col-sm-10 col-sm-offset-1">
+
+	<div class="col-sm-12 center page-title">
+		<h1>Create Replacement</h1>
 	</div>
 
 	@if(Session::get('flash_message'))
-		<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info' role="alert">{{ Session::get('flash_message') }}</div>
-	@endif		
-	<div class="col-sm-10 col-sm-offset-1 signup-container forms-container">
+	<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info alert-dismissible' role="alert">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		{{ Session::get('flash_message') }}
+	</div>
+	@endif
+
 		{{ Form::open(array('url' => '/store-replacement')) }}
 			{{Form::hidden("incident_id", $incident_id)}}
 			<div class="col-sm-6">

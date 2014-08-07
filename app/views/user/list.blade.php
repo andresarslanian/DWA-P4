@@ -6,20 +6,20 @@ Users
 
 @section('content')
 
-<div class="col-sm-offset-5 col-sm-7">
-	<h1>Users</h1>
-</div>
 
-@if(Session::get('flash_message'))
-<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info alert-dismissible' role="alert">
-	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	{{ Session::get('flash_message') }}
-</div>
-@endif	
+<div class="p-body-wrapper col-sm-10 col-sm-offset-1">
+	<div class="col-sm-12 center page-title">
+		<h1>Users</h1>
+	</div>
 
-<div class="col-sm-10 col-sm-offset-1 signup-container">
+	@if(Session::get('flash_message'))
+	<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info alert-dismissible' role="alert">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		{{ Session::get('flash_message') }}
+	</div>
+	@endif
 	@if( Auth::user()->can('create_users_for_company') )
-		<a href="/create-user" class="btn btn-primary col-sm-2">Add new user</a>
+	<a href="/create-user" class="btn btn-primary col-sm-2">Add new user</a>
 	@endif
 
 	@if( Auth::user()->worksFor('Philips') )
@@ -65,7 +65,7 @@ Users
 				<td>
 					<a href="/show-user/{{$user->id}}" class="btn btn-success">View</a>
 					@if( Auth::user()->can('modify_users_for_company'))
-						<a href="/edit-user/{{$user->id}}" class="btn btn-success">Edit</a>
+					<a href="/edit-user/{{$user->id}}" class="btn btn-success">Edit</a>
 					@endif
 				</td>				
 			</tr>

@@ -1,4 +1,46 @@
+body {
+	background-color: #f0f0f2;
+}
 
+body {
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	
+	color: #252f47;
+}
+
+.page-title{
+	margin-bottom: 7%;
+	color: rgb(0, 90, 255);
+	display: inline;
+	font-family: gs_light_regular, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 40px;
+	font-weight: normal;
+	height: auto;
+	line-height: normal;
+	text-align: left;
+	text-decoration: none solid rgb(0, 90, 255);	
+}
+
+.p-body-wrapper{
+	/*background: url('http://www.crsc.philips.com/crsc/images/body_wrapper_sprite.png') repeat-y -2000px 0;*/
+	webkit-box-shadow: 0 0px 12px rgba(58, 51, 46, 0.26);
+	-moz-box-shadow: 0 0px 12px rgba(58, 51, 46, 0.26);
+	box-shadow: 0px 0px 12px rgba(58, 51, 46, 0.26);
+	background-color: white;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	outline: 1px solid white;
+	outline-offset: 10px;
+}
+#p-nav-site{
+	height: 22px;
+}
+
+.navbar-nav>li>a{
+	padding-top: 0;
+	padding-bottom: 0px !important;	
+	font-size: 11px;
+}
 .p-logo{
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
@@ -13,7 +55,7 @@
 	-webkit-box-shadow: 0 3px 8px 3px rgba(0,0,0,0.4);
 	box-shadow: 0 3px 8px 3px rgba(0,0,0,0.4);
 	top: 0px; 
-/*	position: fixed; */
+	/*	position: fixed; */
 	transition: all 0s ease; 
 	-webkit-transition: all 0s ease;
 
@@ -30,13 +72,15 @@
 }
 
 .p-logo:before {
-content: '';
-background: url('/assets/images/sprite-header-rebrand.png') 0 0;
+	content: '';
+	/*background: url('/assets/images/sprite-header-rebrand.png') 0 0;*/
+	background: url('/assets/images/mainlogo.gif');
+/*
 position: absolute;
 left: 0;
 top: 0;
 width: 140px;
-height: 140px;
+height: 140px;*/
 }
 
 .center{
@@ -48,7 +92,14 @@ height: 140px;
 }
 
 .navbar-nav>.active>a {
-	background-color: rgba(100, 149, 237, 0.3) !important;
+
+	background: url('http://www.lighting.philips.com.ar/images/nav_site_sprite.png') no-repeat scroll 0 0 transparent;
+	color: #0E5FD8!important;
+	border: 0;
+	margin: 0;
+	line-height: 22px;
+	padding-left: 15px;
+	height: 22px;	
 }
 
 .login-alert{
@@ -57,11 +108,29 @@ height: 140px;
 }
 
 .p-nav{
-	margin-left: 150px;
+	margin-left: 130px;
+}
+#p-nav-site{
+	webkit-box-shadow: 0 3px 6px rgba(58, 51, 46, 0.26);
+	-moz-box-shadow: 0 3px 6px rgba(58, 51, 46, 0.26);
+	box-shadow: 0px 3px 6px rgba(58, 51, 46, 0.26);
 }
 
+
 .p-nav li:hover{
-	background-color: rgba(100, 149, 237, 0.2) !important;
+	background: url('http://www.lighting.philips.com.ar/images/nav_site_sprite.png') no-repeat scroll 0 -144px transparent;
+	height: 28px;
+	line-height: 28px;
+	margin: -6px 0 0 0;
+	position: relative;
+	border: 0;
+
+}
+.p-nav li:hover a{
+	padding-top: 6px;
+	padding-right: 15px;
+	line-height: 22px;
+	color: #0E5FD8 !important;
 }
 .main-container{
 	margin-top: 100px;
@@ -71,35 +140,52 @@ height: 140px;
 	margin-top: 10%;
 }
 
-body{
-	background-image: url('/assets/images/buenos-aires-puerto-madero.jpg');
-	background-size: 100% auto;
-	color: white;
+
+
+nav{
+	border: 0 !important;
+	border-radius: 0 !important;
 }
 
+nav li a{
+	padding-bottom: 9px !important;
+}
+#p-header{
+	background: white;
+}
+#p-mainlogo {
+	float: left;
+	margin: 23px 0 0 0;
+	display: inline;
+}
+
+#p-header-wrapper {
+	background-color: #FFF;
+	padding: 0 13px;
+	width: 986px;
+	height: 68px;
+	margin: auto;
+	text-align: left;
+}
+.p-clearfix {
+	display: block;
+}
 
 .p-navbar{
 	color: white;	
-/*	position: fixed;*/
-	top: 0;
+	/*	position: fixed;*/
+
 /*	left: 10%;
-	right: 15%; */
+	right: 15%; 
 margin-left: 10%;
 margin-right: 15%;	
-	background: transparent;
-	border: 0px;
-	border-bottom: 1px solid lightgray;
-	border-radius: 0;	
+background: transparent;*/
+background: url(http://www.lighting.philips.com/images/nav_site_sprite_horizontal.png) repeat-x scroll 0 0 transparent;
+min-height: 22px;
+
+
 }
 
-.nav-country{
-	position: absolute;
-	left: 30px;
-}
-
-.status-td{
-	vertical-align: middle !important;
-}
 .p-navbar li a{
 	color: white !important;	
 }
@@ -142,7 +228,7 @@ margin-right: 15%;
 
 }
 textarea {
-    resize: none;
+	resize: none;
 }
 
 .incident-view-container{
@@ -190,6 +276,3 @@ textarea {
 	color: #e86741;
 }
 
-.auth-pswd a{
-	color: aquamarine !important; 
-}

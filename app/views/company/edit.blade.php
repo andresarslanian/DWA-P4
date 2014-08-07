@@ -28,15 +28,17 @@ Edit Company
 	</div>
 </div>
 
-<div class="col-sm-offset-5 col-sm-7">
-	<h1>Company {{$company->id}}</h1>
-</div>
+<div class="p-body-wrapper col-sm-4 col-sm-offset-4">
+	<div class="col-sm-12 center page-title">
+		<h1>Company {{$company->id}}</h1>
+	</div>
 
-@if(Session::get('flash_message'))
-<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info' role="alert">{{ Session::get('flash_message') }}</div>
-@endif		
-
-<div class="col-sm-4 col-sm-offset-4 signup-container forms-container">
+	@if(Session::get('flash_message'))
+	<div class='flash-message col-sm-4 col-sm-offset-4 login-alert center alert alert-info alert-dismissible' role="alert">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		{{ Session::get('flash_message') }}
+	</div>
+	@endif
 
 	{{ Form::open(array('url' => '/edit-company')) }}
 	{{Form::hidden('company_id',$company->id)}}
