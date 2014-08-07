@@ -78,27 +78,46 @@ For accessing the site, here are the credentials:
 
 1)
 Email: test@mydomain.com
+
 Pass: test
+
 Role: Super Admin
+
 Company: Philips
+
+
 
 2)
 Email: robert.thompson@mycompany.com
+
 Pass: test
+
 Role: User
+
 Company: Philips
+
+
 
 3)
 Email: test@company.com
+
 Pass: test
+
 Role: Admin
+
 Company: Autotrol
+
+
 
 4)
 Email: mary.nice@mycompany.com
+
 Pass: test
+
 Role: Viewer
+
 Company: Autotrol
+
 
 
 Unless you find any bugs, the site is ready to be used (well, as soon as I solve some pending points), but the core at least is working.
